@@ -1,24 +1,36 @@
-# Logs
-logs
-*.log
+# Dependencies
+/node_modules
+
+# Build output
+/dist
+/dist-ssr # Jika Anda menggunakan SSR
+
+# Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
+# Editor directories and files (opsional, bisa juga di .gitignore global user Anda)
+.vscode/
+!.vscode/settings.json # Contoh jika ingin menyimpan settings.json tapi abaikan sisanya
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+# JANGAN abaikan .env.example jika Anda punya satu untuk template
+# !.env.example
+
+# Test runner cache files
+.cache/
+coverage/
