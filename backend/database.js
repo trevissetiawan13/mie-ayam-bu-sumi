@@ -1,10 +1,15 @@
 const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcryptjs');
 
-// Buat atau buka database
-const db = new sqlite3.Database('./data.db', (err) => {
+const dbMountPath = process.env.DB_MOUNT_PATH || './'; // Render akan set DB_MOUNT_PATH
+const dbFileName = 'data.db';
+const dbPath = require('path').join(dbMountPath, dbFileName);
+
+console.log(`Database path: ${dbPath}`); // Untuk debugging saat deployment
+
+const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
-        console.error(err.message);
+        console.error("DATABASE CONNECTION ERROR:", err.message);
         throw err;
     }
     console.log('Connected to the SQLite database.');

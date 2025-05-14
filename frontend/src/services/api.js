@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3001/api'; // Sesuaikan jika port backend berbeda
+// VITE_API_URL akan diambil dari file .env.production atau .env.development
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+console.log('API_URL used by frontend:', API_URL); // Untuk debugging // Sesuaikan jika port backend berbeda
 
 const apiClient = axios.create({
     baseURL: API_URL,
