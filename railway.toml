@@ -1,2 +1,5 @@
 [build]
-project = "backend"
+  baseDirectory = "backend"
+
+[deploy]
+  startCommand = "npm start"
