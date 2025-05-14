@@ -10,6 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const allowedOrigins = [
+  'http://localhost:5173',
   'https://mie-ayam-frontend.vercel.app',
   'https://mie-ayam-bu-sumi-production.up.railway.app'
 ];
@@ -32,4 +33,12 @@ app.get('/', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server backend berjalan di http://localhost:${PORT}`);
+});
+
+app.use('/api/auth', authRoutes);
+app.use('/api/transactions', transactionRoutes);
+
+// Jalankan server
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
