@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = __API_URL__ || 'http://localhost:3001/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 console.log('API_URL used by frontend:', API_URL);
 
 const apiClient = axios.create({
