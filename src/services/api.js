@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-
-
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 console.log('API_URL used by frontend:', API_URL);
 console.log('API_URL used by frontend:', import.meta.env.VITE_API_URL);
