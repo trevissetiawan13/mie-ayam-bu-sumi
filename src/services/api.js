@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+const API_URL = 'https://empty-glade-e536.mieayambusumi.workers.dev';
 console.log('API_URL used by frontend:', API_URL);
 console.log('API_URL used by frontend:', import.meta.env.VITE_API_URL);
 
