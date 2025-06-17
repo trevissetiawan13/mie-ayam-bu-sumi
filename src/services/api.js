@@ -1,7 +1,11 @@
 import axios from "axios";
 
 // HARDCODE sementara — untuk testing di Vercel
-const API_URL = "https://empty-glade-e536.mieayambusumi.workers.dev";
+const API_URL = import.meta.env.VITE_API_URL;
+if (!API_URL) {
+  console.warn("VITE_API_URL is not defined in environment variables.");
+}
+
 
 console.log("API_URL used by frontend:", API_URL);
 
