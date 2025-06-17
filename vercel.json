@@ -1,7 +1,5 @@
 {
-  "build": {
-    "env": {
-      "FORCE_REBUILD": "true"
-    }
-  }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
 }
