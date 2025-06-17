@@ -1,0 +1,22 @@
+# Dependencies
+/node_modules
+
+# Environment variables
+.env
+.env.*
+!.env.example # Jika Anda punya template untuk backend
+
+# Database file
+data.db
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor/OS files (opsional jika sudah di .gitignore user global Anda)
+.vscode/
+.idea/
+.DS_Store
