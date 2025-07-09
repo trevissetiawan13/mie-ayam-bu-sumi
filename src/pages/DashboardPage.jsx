@@ -161,7 +161,7 @@ const DashboardPage = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Dashboard Keuangan Mie Ayam Bu Sumi
+            Dashboard Keuangan Mie Ayam Damai
           </Typography>
           <Typography sx={{ mr: 2 }}>Halo, {user?.username}!</Typography>
           <IconButton color="inherit" onClick={logout}>
