@@ -256,7 +256,7 @@ const DashboardPage = () => {
         }}
       >
         <Typography variant="body2">
-          © {new Date().getFullYear()} Mie Ayam Bu Sumi App
+          © {new Date().getFullYear()} Mie Ayam Damai Web
         </Typography>
       </Box>
 
