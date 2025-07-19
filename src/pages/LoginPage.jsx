@@ -80,7 +80,7 @@ const LoginPage = () => {
           variant="h5"
           sx={{ mb: 1, fontWeight: "bold", color: "text.primary" }}
         >
-          Pembukuan Mie Ayam
+          Pembukuan Mie Ayam Damai
         </Typography>
         <Typography
           component="p"
