@@ -118,7 +118,6 @@ const LoginPage = () => {
             error={username.length > 10}
             onChange={(e) => setUsername(e.target.value)}
             disabled={isLoading}
-            // Hapus sx={{ mb: 2 }} dari sini jika sudah menggunakan margin="normal"
           />
           <TextField
             margin="normal" // margin="normal" sudah memberikan margin atas dan bawah
@@ -131,12 +130,11 @@ const LoginPage = () => {
             id="password"
             autoComplete="current-password"
             value={password}
-            inputProps={{ maxLength: 20 }}
-            helperText={`${password.length}/20`}
-            error={password.length > 20}
+            inputProps={{ maxLength: 8 }}
+            helperText={`${password.length}/8`}
+            error={password.length > 8}
             onChange={(e) => setPassword(e.target.value)}
             disabled={isLoading}
-            // Hapus sx={{ mb: 2 }} dari sini
           />
           <Button
             type="submit"
