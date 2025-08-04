@@ -1,40 +1,43 @@
-import React, { useState } from 'react';
-import {
-  Box, TextField, Button, Typography, Grid
-} from '@mui/material';
-import { format } from 'date-fns';
-import TrendingDownIcon from '@mui/icons-material/TrendingDown';
+import React, { useState } from "react";
+import { Box, TextField, Button, Typography, Grid } from "@mui/material";
+import { format } from "date-fns";
+import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 
 const ExpenseForm = ({ onSubmit, isLoading }) => {
-  const [description, setDescription] = useState('');
-  const [amount, setAmount] = useState('');
-  const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'));
+  const [description, setDescription] = useState("");
+  const [amount, setAmount] = useState("");
+  const [date, setDate] = useState(format(new Date(), "yyyy-MM-dd"));
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!description || !amount || amount <= 0) {
-      alert('Mohon isi deskripsi dan jumlah dengan benar (jumlah harus > 0).');
+      alert("Mohon isi deskripsi dan jumlah dengan benar (jumlah harus > 0).");
       return;
     }
 
     onSubmit({
       description,
       amount: Number(amount),
-      type: 'expense',
+      type: "expense",
       date,
     });
 
-    setDescription('');
-    setAmount('');
+    setDescription("");
+    setAmount("");
   };
 
   return (
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{ p: 3, backgroundColor: 'white', borderRadius: 2, boxShadow: 2 }}
+      sx={{ p: 3, backgroundColor: "white", borderRadius: 2, boxShadow: 2 }}
     >
-      <Typography variant="h6" gutterBottom color="error" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      <Typography
+        variant="h6"
+        gutterBottom
+        color="error"
+        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+      >
         <TrendingDownIcon /> Tambah Pengeluaran
       </Typography>
       <Grid container spacing={2}>
@@ -53,15 +56,24 @@ const ExpenseForm = ({ onSubmit, isLoading }) => {
             label="Jumlah (Rp)"
             fullWidth
             inputMode="numeric"
-            inputProps={{ min: 1 }}
+            inputProps={{
+              min: 1,
+              style: { MozAppearance: "textfield" }, // untuk Firefox
+            }}
+            sx={{
+              "& input[type=number]::-webkit-outer-spin-button": {
+                display: "none",
+              },
+              "& input[type=number]::-webkit-inner-spin-button": {
+                display: "none",
+              },
+            }}
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             required
-            error={amount !== '' && amount <= 0}
+            error={amount !== "" && amount <= 0}
             helperText={
-              amount !== '' && amount <= 0
-                ? 'Jumlah harus lebih dari 0'
-                : ' '
+              amount !== "" && amount <= 0 ? "Jumlah harus lebih dari 0" : " "
             }
           />
         </Grid>
@@ -83,7 +95,7 @@ const ExpenseForm = ({ onSubmit, isLoading }) => {
             color="error"
             disabled={isLoading}
             fullWidth
-            sx={{ height: '56px' }}
+            sx={{ height: "56px" }}
           >
             Simpan Pengeluaran
           </Button>
