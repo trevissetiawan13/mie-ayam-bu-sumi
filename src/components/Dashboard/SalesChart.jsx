@@ -1,11 +1,15 @@
-import React from 'react';
+import React from "react";
+import { Paper, Typography, Box, CircularProgress } from "@mui/material";
 import {
-  Paper, Typography, Box, CircularProgress
-} from '@mui/material';
-import {
-  BarChart, Bar, XAxis, YAxis,
-  CartesianGrid, Tooltip, Legend, ResponsiveContainer
-} from 'recharts';
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const SalesChart = ({
   mainTransactions,
@@ -15,10 +19,10 @@ const SalesChart = ({
   loading,
 }) => {
   const formatCurrency = (value) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 0
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
     }).format(value);
   };
 
@@ -27,19 +31,44 @@ const SalesChart = ({
 
   const chartData = [];
 
-  if (mainTransactions.length) {
-    chartData.push({
-      name: new Date(selectedDate).toLocaleDateString('id-ID', { day: '2-digit', month: 'short' }),
-      Pendapatan_A: getTotal(mainTransactions, 'income'),
-      Pengeluaran_A: getTotal(mainTransactions, 'expense'),
+  // ✅ Format label tanggal A
+  const labelDateA = new Date(selectedDate).toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "long",
+  });
+
+  // Placeholder label untuk tanggal B
+  let labelDateB = "Tanggal B";
+
+  if (compareDate && compareDate.includes("-")) {
+    const [year, month, day] = compareDate.split("-");
+    const parsed = new Date(Number(year), Number(month) - 1, Number(day));
+    labelDateB = parsed.toLocaleDateString("id-ID", {
+      day: "2-digit",
+      month: "long",
     });
   }
 
-  if (compareTransactions.length) {
+  if (mainTransactions.length) {
     chartData.push({
-      name: new Date(compareDate).toLocaleDateString('id-ID', { day: '2-digit', month: 'short' }),
-      Pendapatan_B: getTotal(compareTransactions, 'income'),
-      Pengeluaran_B: getTotal(compareTransactions, 'expense'),
+      name: labelDateA,
+      Pendapatan_A: getTotal(mainTransactions, "income"),
+      Pengeluaran_A: getTotal(mainTransactions, "expense"),
+    });
+  }
+
+  if (compareTransactions.length && compareDate && compareDate.includes("-")) {
+    const [year, month, day] = compareDate.split("-");
+    const parsedCompareDate = new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day)
+    );
+
+    chartData.push({
+      name: labelDateB,
+      Pendapatan_B: getTotal(compareTransactions, "income"),
+      Pengeluaran_B: getTotal(compareTransactions, "expense"),
     });
   }
 
@@ -49,17 +78,22 @@ const SalesChart = ({
         Grafik Keuangan
       </Typography>
       {loading ? (
-        <Box display="flex" justifyContent="center" alignItems="center" height={300}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height={300}
+        >
           <CircularProgress />
         </Box>
       ) : chartData.length === 0 ? (
         <Typography
           sx={{
-            textAlign: 'center',
+            textAlign: "center",
             height: 300,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           Tidak ada data untuk ditampilkan.
@@ -72,10 +106,26 @@ const SalesChart = ({
             <YAxis tickFormatter={formatCurrency} />
             <Tooltip formatter={formatCurrency} />
             <Legend />
-            <Bar dataKey="Pendapatan_A" fill="#4caf50" name="Pendapatan (Tanggal A)" />
-            <Bar dataKey="Pengeluaran_A" fill="#f44336" name="Pengeluaran (Tanggal A)" />
-            <Bar dataKey="Pendapatan_B" fill="#2196f3" name="Pendapatan (Tanggal B)" />
-            <Bar dataKey="Pengeluaran_B" fill="#ff9800" name="Pengeluaran (Tanggal B)" />
+            <Bar
+              dataKey="Pendapatan_A"
+              fill="#4caf50"
+              name={`Pendapatan (${labelDateA})`}
+            />
+            <Bar
+              dataKey="Pengeluaran_A"
+              fill="#f44336"
+              name={`Pengeluaran (${labelDateA})`}
+            />
+            <Bar
+              dataKey="Pendapatan_B"
+              fill="#2196f3"
+              name={`Pendapatan (${labelDateB})`}
+            />
+            <Bar
+              dataKey="Pengeluaran_B"
+              fill="#ff9800"
+              name={`Pengeluaran (${labelDateB})`}
+            />
           </BarChart>
         </ResponsiveContainer>
       )}

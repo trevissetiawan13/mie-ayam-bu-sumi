@@ -233,6 +233,7 @@ const DashboardPage = () => {
             <SalesChart
               transactions={filteredTransactions}
               selectedDate={selectedDate}
+              compareDate={compareDate} 
               loading={loading}
               mainTransactions={mainTransactions}
               compareTransactions={compareTransactions}
